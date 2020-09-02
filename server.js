@@ -5,15 +5,18 @@ const methodOverride = require('method-override')
 const Article = require('./models/article')
 
 
+// Environment variables
+const APP_PORT = process.env.APP_PORT || 5000
+const MONGO_HOST = process.env.MONGO_HOST || 'localhost'
+const MONGO_PORT = process.env.MONGO_PORT || '27017'
+const MONGO_DB = process.env.MONGO_DB || 'markdownblog'
+
 // Connecting to db
-mongoose.connect('mongodb://localhost:27017/markdownblog', { 
+mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`, { 
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 // Init
 const app = express()
-
-// Environment variables
-const APP_PORT = process.env.APP_PORT || 5000
 
 // Choose the view engine
 app.set('view engine', 'ejs')
